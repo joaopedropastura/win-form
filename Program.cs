@@ -130,6 +130,7 @@ var prodInput = new TextBox();
 var stoqInput = new TextBox();
 var precInput = new TextBox();
 
+ListViewItem ListView = new ListViewItem();
 
 // exitBtn.Text = "me aperte pra fechar";
 // exitBtn.Width = 150;
@@ -220,6 +221,11 @@ addBtn.Click +=  async (s, e) =>
         MessageBox.Show("erro"); 
 }; 
 
+
+stoqView.Click += async(s, e) =>
+{
+    
+};
 
 form.KeyPreview = true;
 form.KeyDown += (s, e) =>

@@ -1,5 +1,10 @@
 using winForms.Model;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using System;
+using System.Linq;
+
 public class EstoqueService
 {
     CrudWinFormContext context = new CrudWinFormContext();
@@ -20,8 +25,9 @@ public class EstoqueService
         }
     }
 
-    // public async Task<int> VerificaEstoque()
-    // {
-        
-    // }
+    public async Task<List<Estoque>> VerificaEstoque(Expression<Func<Produto, bool>> exp)
+    {
+        var query = context.Estoques.Where(exp);
+        return await query.ToListAsync();
+    }
 }
