@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.IO;
 using winForms.Model;
 using System.Linq;
+using System.Collections.Generic;
 
 // ApplicationConfiguration.Initialize();
 
@@ -121,124 +122,125 @@ using System.Linq;
 
 
 
-ApplicationConfiguration.Initialize();
+// ApplicationConfiguration.Initialize();
 
-var form = new Form();
-var addBtn = new Button();
-var stoqView = new Button();
-var prodInput = new TextBox();
-var stoqInput = new TextBox();
-var precInput = new TextBox();
+// var form = new Form();
+// var addBtn = new Button();
+// var stoqView = new Button();
+// var prodInput = new TextBox();
+// var stoqInput = new TextBox();
+// var precInput = new TextBox();
 
-ListViewItem ListView = new ListViewItem();
+// ListViewItem ListView = new ListViewItem();
 
-// exitBtn.Text = "me aperte pra fechar";
-// exitBtn.Width = 150;
+// // exitBtn.Text = "me aperte pra fechar";
+// // exitBtn.Width = 150;
 
-stoqView.Text = "gerenciar estoque";
-stoqView.Width = 150;
+// stoqView.Text = "gerenciar estoque";
+// stoqView.Width = 150;
 
-addBtn.Text = "me aperte pra adicionar";
-addBtn.Width = 150;
+// addBtn.Text = "me aperte pra adicionar";
+// addBtn.Width = 150;
 
-var prodLabel = new Label();
-    prodLabel.Text = "Produto: ";
+// var prodLabel = new Label();
+//     prodLabel.Text = "Produto: ";
 
-var stoqLabel = new Label();
-    stoqLabel.Text = "Estoque: ";
+// var stoqLabel = new Label();
+//     stoqLabel.Text = "Estoque: ";
 
-var precLabel = new Label();
-    precLabel.Text = "Preço: ";
+// var precLabel = new Label();
+//     precLabel.Text = "Preço: ";
 
-var flowLayoutPanel = new FlowLayoutPanel();
-    flowLayoutPanel.FlowDirection = FlowDirection.TopDown;
-    flowLayoutPanel.WrapContents = false;
-    flowLayoutPanel.AutoScroll = true;
-    flowLayoutPanel.AutoSize = true;
-    
-var prodPanel = new FlowLayoutPanel();
-    prodPanel.AutoSize = true;
-    prodPanel.Controls.Add(prodLabel);
-    prodPanel.Controls.Add(prodInput);
+// var flowLayoutPanel = new FlowLayoutPanel();
+//     flowLayoutPanel.FlowDirection = FlowDirection.TopDown;
+//     flowLayoutPanel.WrapContents = false;
+//     flowLayoutPanel.AutoScroll = true;
+//     flowLayoutPanel.AutoSize = true;
 
-var stoqPanel = new FlowLayoutPanel();
-    stoqPanel.AutoSize = true;
-    stoqPanel.Controls.Add(stoqLabel);
-    stoqPanel.Controls.Add(stoqInput);
+// var prodPanel = new FlowLayoutPanel();
+//     prodPanel.AutoSize = true;
+//     prodPanel.Controls.Add(prodLabel);
+//     prodPanel.Controls.Add(prodInput);
 
-var precPanel = new FlowLayoutPanel();
-    precPanel.AutoSize = true;
-    precPanel.Controls.Add(precLabel);
-    precPanel.Controls.Add(precInput);
+// var stoqPanel = new FlowLayoutPanel();
+//     stoqPanel.AutoSize = true;
+//     stoqPanel.Controls.Add(stoqLabel);
+//     stoqPanel.Controls.Add(stoqInput);
 
-var btnPanel = new FlowLayoutPanel();
-    // btnPanel.FlowDirection = FlowDirection.TopDown;
-    // btnPanel.Dock = DockStyle.Fill;
-    btnPanel.Controls.Add(stoqView);
-    btnPanel.Controls.Add(addBtn);
-    btnPanel.AutoSize = true;
+// var precPanel = new FlowLayoutPanel();
+//     precPanel.AutoSize = true;
+//     precPanel.Controls.Add(precLabel);
+//     precPanel.Controls.Add(precInput);
 
-prodInput.Width = 200;
-stoqInput.Width = 200;
-precInput.Width = 200;
+// var btnPanel = new FlowLayoutPanel();
+//     // btnPanel.FlowDirection = FlowDirection.TopDown;
+//     // btnPanel.Dock = DockStyle.Fill;
+//     btnPanel.Controls.Add(stoqView);
+//     btnPanel.Controls.Add(addBtn);
+//     btnPanel.AutoSize = true;
 
-
-flowLayoutPanel.Controls.Add(prodPanel);
-flowLayoutPanel.Controls.Add(stoqPanel);
-flowLayoutPanel.Controls.Add(precPanel);
-flowLayoutPanel.Controls.Add(btnPanel);
-
-flowLayoutPanel.Dock = DockStyle.Fill;
-form.Controls.Add(flowLayoutPanel);
-// form.Controls.Add(stoqView);
-
-form.AutoSize = true;
-
-ProductService prodService = new ProductService();
-EstoqueService stoqService = new EstoqueService();
-Produto prod = new Produto();
-Estoque estq = new Estoque();
+// prodInput.Width = 200;
+// stoqInput.Width = 200;
+// precInput.Width = 200;
 
 
-addBtn.Click +=  async (s, e) => 
-{
+// flowLayoutPanel.Controls.Add(prodPanel);
+// flowLayoutPanel.Controls.Add(stoqPanel);
+// flowLayoutPanel.Controls.Add(precPanel);
+// flowLayoutPanel.Controls.Add(btnPanel);
 
-    prod.Name = prodInput.Text;
-    prod.Preco = int.Parse(precInput.Text);
+// flowLayoutPanel.Dock = DockStyle.Fill;
+// form.Controls.Add(flowLayoutPanel);
+// // form.Controls.Add(stoqView);
 
-    var resultProd = await prodService.AddProduct(prod);
-    var produt = await prodService.Filter(x => x.Name == prod.Name);
-    var prodResult = produt.FirstOrDefault();
+// form.AutoSize = true;
 
-    estq.ProdutoId = prodResult.Id;
-    estq.Quantidade =int.Parse(stoqInput.Text);
-
-    var resultStoq = await stoqService.AddEstoque(estq);
-
-    if(resultProd && resultStoq)
-        MessageBox.Show("cadastro realizado com sucesso");
-    else
-        MessageBox.Show("erro"); 
-}; 
+// ProductService prodService = new ProductService();
+// EstoqueService stoqService = new EstoqueService();
+// Produto prod = new Produto();
+// Estoque estq = new Estoque();
 
 
-stoqView.Click += async(s, e) =>
-{
-    
-};
+// addBtn.Click +=  async (s, e) => 
+// {
 
-form.KeyPreview = true;
-form.KeyDown += (s, e) =>
-{
-    if (e.KeyCode == Keys.Escape)
-        Application.Exit();
-};
+//     prod.Name = prodInput.Text;
+//     prod.Preco = int.Parse(precInput.Text);
+
+//     var resultProd = await prodService.AddProduct(prod);
+//     var produt = await prodService.Filter(x => x.Name == prod.Name);
+//     var prodResult = produt.FirstOrDefault();
+
+//     estq.ProdutoId = prodResult.Id;
+//     estq.Quantidade =int.Parse(stoqInput.Text);
+
+//     var resultStoq = await stoqService.AddEstoque(estq);
+
+//     if(resultProd && resultStoq)
+//         MessageBox.Show("cadastro realizado com sucesso");
+//     else
+//         MessageBox.Show("erro"); 
+// }; 
 
 
-Application.Run(form);
+// stoqView.Click += async(s, e) =>
+// {
+//     var temp = await stoqService.VerificaEstoque(x => x.Id > 0);       
+//     // ListView.Columns.Add();
+// };
 
-PictureBox pb = new PictureBox();
-form.Controls.Add(pb);
+// form.KeyPreview = true;
+// form.KeyDown += (s, e) =>
+// {
+//     if (e.KeyCode == Keys.Escape)
+//         Application.Exit();
+// };
+
+
+// Application.Run(form);
+
+// PictureBox pb = new PictureBox();
+// form.Controls.Add(pb);
 
 // ---------------------   USANDO TABLE LAYOUT     --------------------------
 
@@ -311,3 +313,227 @@ form.Controls.Add(pb);
 // form.Controls.Add(pb);
 
 // Application.Run(form);
+
+
+// public class MyControl : UserControl
+// {
+
+// }
+
+
+// ---------------------   MOUSE POSITION     --------------------------
+
+
+
+// ApplicationConfiguration.Initialize();
+
+// var form = new Form();
+
+// var flowLayoutPanel = new FlowLayoutPanel();
+//     flowLayoutPanel.FlowDirection = FlowDirection.TopDown;
+//     flowLayoutPanel.WrapContents = false;
+//     flowLayoutPanel.AutoScroll = true;
+//     flowLayoutPanel.AutoSize = true;
+
+// Point? p = null;
+
+// var Btn1 = new Button();
+// var stoqView = new Button();
+
+// Btn1.Text = "to aq";
+// Btn1.Width = 150;
+
+// // var APanel = new FlowLayoutPanel();
+// //     APanel.BackColor = Color.Blue;
+// //     APanel.AutoSize = true;
+
+// var BPanel = new FlowLayoutPanel();
+//     BPanel.BackColor = Color.Green;
+//     BPanel.AutoSize = true;
+
+// BPanel.Location = new Point(50,100);
+
+// Btn1.MouseMove += (s, e) =>
+// {
+//     if (p is null)
+//         return;
+
+//     var dx = e.Location.X - p.Value.X;
+//     var dy = e.Location.Y - p.Value.Y;
+//     Btn1.Location = new Point(
+//         Btn1.Location.X + dx, 
+//         Btn1.Location.Y + dy
+//     );
+// };
+
+// form.KeyPreview = true;
+// form.KeyDown += (s, e) =>
+// {
+//     if (e.KeyCode == Keys.Escape)
+//         Application.Exit();
+// };
+
+// Btn1.MouseDown += (s, e) =>
+// {
+
+//     p = e.Location;
+
+//     var parent = Btn1.Parent;
+//     if(parent == BPanel)
+//     {
+//         BPanel.Controls.Remove(Btn1);
+//         form.Controls.Add(Btn1);
+//         Btn1.BringToFront();
+
+//     }
+// };
+
+// Btn1.MouseUp += (s, e) =>
+// {
+//     p = null;
+//     if(Btn1.Top > BPanel.Top && Btn1.Bottom < BPanel.Bottom )   
+//     {
+//         BPanel.Controls.Add(Btn1);
+//         MessageBox.Show("TA NO BPANEL");
+//         return;
+//     }
+
+// };
+
+// form.Controls.Add(BPanel);
+// form.Controls.Add(Btn1);
+// Btn1.BringToFront();
+// Application.Run(form);
+
+
+// Bitmap bmp = null;
+// Graphics g = null;
+
+
+
+// ---------------------   SPRITES LAYOUT     --------------------------
+
+ 
+
+ApplicationConfiguration.Initialize();
+
+var form = new Form();
+
+form.WindowState = FormWindowState.Maximized;
+form.FormBorderStyle = FormBorderStyle.None;
+
+Graphics g = null;
+Bitmap bmp = null;
+PictureBox pb = new PictureBox();
+pb.Dock = DockStyle.Fill;
+form.Controls.Add(pb);
+
+Image img = Bitmap.FromFile("./zelda.png");
+
+Point cursor = Point.Empty;
+pb.MouseMove += (s, e) =>
+{
+    cursor = e.Location;
+};
+var tm = new Timer();
+tm.Interval = 30;
+
+int x = 0;
+int y = 0;
+int speed = 0;
+
+int posXPng = 1;
+int posYPng = 0;
+int tamXPng = 2;
+int tamYPng = 1;
+int spriteWidth = 120;
+int spriteHeight = 130;
+Queue<DateTime> queue = new Queue<DateTime>();
+queue.Enqueue(DateTime.Now);
+
+var latestChange = DateTime.Now;
+
+tm.Tick += delegate 
+{
+    Rectangle tela = new Rectangle(speed, y, spriteWidth, spriteHeight);
+    
+    Rectangle imgOriginal = new Rectangle(spriteWidth * posXPng, spriteHeight * posYPng, spriteWidth, spriteHeight);
+    g.FillRectangle(Brushes.Black, tela);
+    g.DrawImage(img, tela, imgOriginal, GraphicsUnit.Pixel);
+    var now = DateTime.Now;
+    queue.Enqueue(now);
+    
+    if (queue.Count > 19)
+    {
+        DateTime old = queue.Dequeue();
+        var time = now - old;
+        var fps = (int)(19 / time.TotalSeconds);
+    }
+    if ((now - latestChange).TotalMilliseconds >= 1000/tamXPng)
+    {
+        posXPng = posXPng < tamXPng ? posXPng += 1 : 1;
+        speed += speed;
+        latestChange = DateTime.Now;
+    }
+    pb.Refresh();
+    g.Clear(Color.White);
+};
+
+form.Load += delegate
+{
+    form.KeyPreview = true;
+    bmp = new Bitmap(pb.Width, pb.Height);
+    g = Graphics.FromImage(bmp);
+    pb.Image = bmp;
+    tm.Start();
+};
+
+// form.KeyPreview = true;
+form.KeyDown += (s, e) =>
+{
+    if (e.KeyCode == Keys.Escape)
+        Application.Exit();
+    
+
+    if (e.KeyCode == Keys.D)
+    {
+        speed = 10;
+        posYPng = 7;
+        tamXPng = 9;
+    }
+    if (e.KeyCode == Keys.A)
+    {
+        speed = -10;
+        posYPng = 5;
+        tamXPng = 9;
+    }
+
+    if (e.KeyCode == Keys.W)
+    {
+        speed = 10;
+        posYPng = 6;
+        tamXPng = 9;
+    }
+    if (e.KeyCode == Keys.S)
+    {
+        speed = 10;
+        posYPng = 4;
+        tamXPng = 9;
+    }
+};
+
+
+form.KeyUp += (s, e) => 
+{
+    speed = 0;
+    if (e.KeyCode == Keys.A)
+    {
+        posYPng = 2;
+    }
+    posXPng = 1;
+    posYPng = 0;
+    tamXPng = 2;
+    tamYPng = 1;
+};
+
+Application.Run(form);

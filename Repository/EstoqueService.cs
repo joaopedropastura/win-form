@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 public class EstoqueService
 {
@@ -25,7 +26,7 @@ public class EstoqueService
         }
     }
 
-    public async Task<List<Estoque>> VerificaEstoque(Expression<Func<Produto, bool>> exp)
+    public async Task<List<Estoque>> VerificaEstoque(Expression<Func<Estoque, bool>> exp)
     {
         var query = context.Estoques.Where(exp);
         return await query.ToListAsync();
